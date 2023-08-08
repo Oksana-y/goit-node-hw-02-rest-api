@@ -5,6 +5,7 @@ const contactAddSchema = Joi.object({
   email: Joi.string(),
   phone: Joi.string(),
   favorite: Joi.boolean(),
+
 });
 
 const contactUpdateFavoriteSchema = Joi.object({
@@ -15,6 +16,5 @@ export default {
   contactAddSchema,
   contactUpdateFavoriteSchema,
 };
-
 
 
