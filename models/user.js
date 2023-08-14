@@ -2,26 +2,33 @@ import { Schema, model } from "mongoose";
 import { handleSaveError, runValidateAtUpdate } from "./hooks.js";
 import { emailRegexp } from "../constants/user-constants.js";
 
-const userSchema = new Schema({
-  name: {
+const userSchema = new Schema(
+  {
+    name: {
       type: String,
       required: true,
-  },
-  email: {
+    },
+    email: {
       type: String,
       match: emailRegexp,
       unique: true,
       required: true,
-  },
-  password: {
+    },
+    password: {
       type: String,
       minlength: 6,
       required: true,
-  },
-  token: {
+    },
+    avatarURL: {
       type: String,
-  }
-}, {versionKey: false, timestamps: true});
+      required: true,
+    },
+    token: {
+      type: String,
+    },
+  },
+  { versionKey: false, timestamps: true }
+);
 
 userSchema.pre("findOneAndUpdate", runValidateAtUpdate);
 

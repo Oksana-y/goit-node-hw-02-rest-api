@@ -2,7 +2,12 @@ import express from "express";
 import contactsController from "../../controllers/contacts-controllers.js";
 import { validateBody } from "../../decorators/index.js";
 import contactsSchema from "../../schemas/contacts-schemas.js";
-import { authenticate,isEmptyBody, isValidId } from "../../middlewares/index.js";
+import {
+  upload,
+  authenticate,
+  isEmptyBody,
+  isValidId,
+} from "../../middlewares/index.js";
 
 const contactAddValidate = validateBody(contactsSchema.contactAddSchema);
 const contactUpdateFavorite = validateBody(
@@ -19,6 +24,7 @@ contactsRouter.get("/:contactId", isValidId, contactsController.getById);
 
 contactsRouter.post(
   "/",
+  upload.single("avatar"),
   isEmptyBody,
   contactAddValidate,
   contactsController.add
